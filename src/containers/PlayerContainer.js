@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Search from '../components/Search'
 import YouTube from 'react-youtube'
-
+import Nav from '../components/Nav'
 
 
 export default class PlayerContainer extends Component {
@@ -22,19 +22,6 @@ export default class PlayerContainer extends Component {
       leftVideo: result
     })
   }
-
-
-  // onYouTubeIframeAPIReady =() => {
-  //   this.state.leftPlayer = new YT.Player('left-player', {
-  //       events: {
-  //         'onReady': onPlayerReady,
-  //         'onStateChange': onPlayerStateChange
-  //       }
-  //   });
-  // }
-  // callback = (e) => {
-  //   this.player = e
-  // }
 
   onReady = (e) => {
     this.player = e.target
@@ -70,6 +57,7 @@ export default class PlayerContainer extends Component {
   render() {
     return (
       <div>
+        <Nav />
         <Search handleVideoClick={this.handleVideoClick} />
         {this.renderIframe()}
         <button type='button' onClick={this.playVideo}>Play</button>
