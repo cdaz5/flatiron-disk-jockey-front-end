@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Search from './components/Search'
-import PlayerContainer from './containers/PlayerContainer'
 import AuthAdapter from './authAdapter'
 import {BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Authorize from './Authorize'
@@ -8,7 +7,7 @@ import Nav from './components/Nav'
 import Landing from './components/Landing'
 import Login from './components/Login'
 import SignUp from './components/Signup'
-
+import AppContainer from './containers/AppContainer'
 
 class App extends Component {
 
@@ -74,7 +73,7 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path="/" render={() => this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <Landing />} />
-          <Route path="/players" component={Authorize(PlayerContainer)} />
+          <Route path="/players" component={Authorize(AppContainer)} />
           <Route path="/signup" render={()=> this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <SignUp onSendSignUp={this.onSignup}/> } />
           <Route path="/logout" render={() => {
             this.handleLogout()

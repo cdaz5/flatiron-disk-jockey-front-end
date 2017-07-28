@@ -1,68 +1,91 @@
 import React, {Component} from 'react';
 import Nav from '../components/Nav'
+import PlayerContainer from './PlayerContainer'
+import { Grid, Segment } from 'semantic-ui-react'
+import MixerContainer from './MixerContainer'
 
 
 export default class AppContainer extends Component {
     constructor() {
       super();
 
-      this.playerLeft = null
-      this.playerRight = null
-
       this.state = {
+      playerLeft: null,
+      playerRight: null,
+
         leftVideo: {},
         rightVideo: {},
         results: []
       }
     }
 
-  handleVideoClick = (result) => {
-    this.setState({
-      leftVideo: result
-    })
+  handleSetPlayer = (event, position) => {
+    if(position === "left"){
+      this.setState({
+        playerLeft: event.target
+      })
+      console.log('hit left')
+    } else {
+      this.setState({
+        playerRight: event.target
+      })
+      console.log('hit right')
+    }
   }
 
-  onReady = (e) => {
-    this.player = e.target
-  }
-
-  playVideo = () => {
-    this.player.playVideo()
-  }
-
-  stopVideo = () => {
-    this.player.stopVideo()
-  }
-
-  pauseVideo = () => {
-    this.player.pauseVideo()
-  }
-
-
-  fetchVideo = () => {
-
-  }
-  renderIframe = () => {
-    return !!this.state.leftVideo.id ?  <YouTube id='pray'
-      videoId={this.state.leftVideo.id.videoId}
-      opts={{
-        height: '390',
-          width: '640'}}
-      onReady={this.onReady.bind(this)}
-
-    /> : null
+  handleVideoClick = (result, position) => {
+    if(position === "left"){
+      this.setState({
+        leftVideo: result
+      })
+    } else {
+      this.setState({
+        rightVideo: result
+      })
+    }
   }
 
   render() {
     return (
       <div>
         <Nav />
-        <Search handleVideoClick={this.handleVideoClick} />
-        {this.renderIframe()}
-        <button type='button' onClick={this.playVideo}>Play</button>
-        <button type='button' onClick={this.stopVideo}>Stop</button>
-        <button type='button' onClick={this.pauseVideo}>Pause</button>
-
+        <Grid columns='equal'>
+          <Grid.Row>
+            <Grid.Column>
+              <Segment>
+                <PlayerContainer
+                  video={this.state.leftVideo}
+                  position="left"
+                  onVideoClick={this.handleVideoClick}
+                  onSetPlayer={this.handleSetPlayer}
+                />
+              </Segment>
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <Segment>
+                <MixerContainer
+                  leftVideoEvent={this.state.playerLeft}
+                  rightVideoEvent={this.state.playerRight}
+                />
+              </Segment>
+            </Grid.Column>
+            <Grid.Column>
+              <Segment>
+                <PlayerContainer
+                  video={this.state.rightVideo}
+                  position="right"
+                  onVideoClick={this.handleVideoClick}
+                  onSetPlayer={this.handleSetPlayer}
+                />
+              </Segment>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Segment />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }

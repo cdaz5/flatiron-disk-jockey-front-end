@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Search from '../components/Search'
 import YouTube from 'react-youtube'
-import Nav from '../components/Nav'
+import { Button, Icon } from 'semantic-ui-react'
 
 
 export default class PlayerContainer extends Component {
@@ -9,22 +9,13 @@ export default class PlayerContainer extends Component {
       super();
 
       this.player = null
-
-      this.state = {
-        leftVideo: {},
-        rightVideo: {},
-        leftPlayer: {}
-      }
     }
 
-  handleVideoClick = (result) => {
-    this.setState({
-      leftVideo: result
-    })
-  }
 
   onReady = (e) => {
-    this.player = e.target
+    const event = e
+    this.player = event.target
+    this.props.onSetPlayer(event, this.props.position)
   }
 
   playVideo = () => {
@@ -39,31 +30,30 @@ export default class PlayerContainer extends Component {
     this.player.pauseVideo()
   }
 
-
-  fetchVideo = () => {
-
-  }
   renderIframe = () => {
-    return !!this.state.leftVideo.id ?  <YouTube id='pray'
-      videoId={this.state.leftVideo.id.videoId}
-      opts={{
-        height: '390',
-          width: '640'}}
+    return !!this.props.video.id ?  <YouTube id='pray'
+      videoId={this.props.video.id.videoId}
       onReady={this.onReady.bind(this)}
 
     /> : null
   }
 
+  handleVideoClick = (result) => {
+    this.props.onVideoClick(result, this.props.position)
+  }
+
   render() {
     return (
       <div>
-        <Nav />
         <Search handleVideoClick={this.handleVideoClick} />
-        {this.renderIframe()}
-        <button type='button' onClick={this.playVideo}>Play</button>
-        <button type='button' onClick={this.stopVideo}>Stop</button>
-        <button type='button' onClick={this.pauseVideo}>Pause</button>
-
+        <div className="videoWrapper">{this.renderIframe()}</div>
+        {this.props.video.id ?
+        <Button.Group labeled>
+          <Button icon='play' content='Play' onClick={this.playVideo} />
+          <Button icon='pause' content='Pause' onClick={this.pauseVideo} />
+          <Button icon='stop' content='Stop' onClick={this.stopVideo} />
+        </Button.Group> : null
+      }
       </div>
     )
   }
