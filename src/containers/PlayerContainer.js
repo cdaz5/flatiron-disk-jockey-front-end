@@ -31,6 +31,7 @@ export default class PlayerContainer extends Component {
   }
 
   renderIframe = () => {
+    console.log(this.props.video)
     return !!this.props.video.id ?  <YouTube id='pray'
       videoId={this.props.video.id.videoId}
       onReady={this.onReady.bind(this)}

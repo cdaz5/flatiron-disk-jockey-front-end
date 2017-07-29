@@ -3,6 +3,7 @@ import Nav from '../components/Nav'
 import PlayerContainer from './PlayerContainer'
 import { Grid, Segment } from 'semantic-ui-react'
 import MixerContainer from './MixerContainer'
+import ResultContainer from './ResultContainer'
 
 
 export default class AppContainer extends Component {
@@ -82,6 +83,10 @@ export default class AppContainer extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
+              <Segment />
+              <div>
+                < ResultContainer />
+              </div>
               <Segment />
             </Grid.Column>
           </Grid.Row>

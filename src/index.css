@@ -41,3 +41,8 @@ body {
 /*.volumeLeft {
   float: left;
 }*/
+
+.resultBottom {
+  margin-left: 200px;
+  margin-right: 200px;
+}
