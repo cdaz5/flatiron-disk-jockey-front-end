@@ -2,34 +2,23 @@ import React, {Component} from 'react'
 import { Grid, Image } from 'semantic-ui-react'
 import YouTube from 'react-youtube'
 
-
-// using a hard core of the url for a medium size thumbnail for now
-// have to figure out how to pull the data and then map over it and render it
-// in this format
-const src = 'https://i.ytimg.com/vi/64liF2VuLxI/mqdefault.jpg'
-
-
 class Result extends Component {
 
-  renderIframe = () => {
-    return !!this.props.video.id ?  <YouTube id='pray'
-      videoId={this.props.video.id.videoId}
-      onReady={this.onReady.bind(this)}
-
-    /> : null
-  }
 
   render(){
+      let leftVideo = this.props.mashupInfo.videos[0]
+      let rightVideo = this.props.mashupInfo.videos[1]
+
       return(
         <Grid.Column>
           <Grid textAlign='center'>
             <Grid.Row columns={2} color='olive'>
                 <Grid.Column>
-                  <Image src={src} />
+                  <Image src={leftVideo.thumbnail} />
                 </Grid.Column>
 
                 <Grid.Column>
-                  <Image src={src} />
+                  <Image src={rightVideo.thumbnail} />
                 </Grid.Column>
             </Grid.Row>
 
@@ -41,7 +30,9 @@ class Result extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
+          <br/>
         </Grid.Column>
+
   )
  }
 }

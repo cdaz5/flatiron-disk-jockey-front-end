@@ -67,6 +67,8 @@ export default class AppContainer extends Component {
                 <MixerContainer
                   leftVideoEvent={this.state.playerLeft}
                   rightVideoEvent={this.state.playerRight}
+                  leftVideo={this.state.leftVideo}
+                  rightVideo={this.state.rightVideo}
                 />
               </Segment>
             </Grid.Column>

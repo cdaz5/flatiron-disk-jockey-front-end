@@ -11,12 +11,25 @@ export default class ResultContainer extends Component {
   constructor() {
     super();
     this.state = {
-      mashups: [{url: "test", youtube: "testid"},
-                {url: "test", youtube: "testid"},
-                {url: "test", youtube: "testid"},
-                {url: "test", youtube: "testid"},
-                {url: "test", youtube: "testid"},
-                {url: "test", youtube: "testid"}]
+      mashups: []
+    }
+  }
+
+  componentDidMount() {
+    let baseUrl = 'http://localhost:3000/api/v1'
+    fetch(`${baseUrl}/mashups`, {
+      headers: this.headers()
+    }).then(res => res.json())
+    .then(allMashups => this.setState({
+      mashups: allMashups
+    }))
+  }
+
+  headers () {
+    return {
+      'content-type': 'application/json',
+      'accept': 'application/json',
+      'Authorization': localStorage.getItem('jwt')
     }
   }
 

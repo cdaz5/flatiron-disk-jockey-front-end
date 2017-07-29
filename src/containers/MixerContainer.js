@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, Form } from 'semantic-ui-react'
 
 class MixerContainer extends React.Component {
   constructor(props){
@@ -33,11 +34,65 @@ class MixerContainer extends React.Component {
       : null
   }
 
+  //code for save button/////////////////////////////////////
+
+  headers () {
+    return {
+      'content-type': 'application/json',
+      'accept': 'application/json',
+      'Authorization': localStorage.getItem('jwt')
+    }
+  }
+
+  handleSave = (event) => {
+
+    let baseUrl = 'http://localhost:3000/api/v1'
+    let left = this.props.leftVideo
+    let right = this.props.rightVideo
+    let title = event.target.title.value
+    let newMashup = {
+      title: 'test',
+      videos: [ {
+        youtube_id: left.id.videoId,
+        title: left.snippet.title,
+        thumbnail: left.snippet.thumbnails.medium.url
+      }, {
+        youtube_id: right.id.videoId,
+        title: right.snippet.title,
+        thumbnail: right.snippet.thumbnails.medium.url
+      } ]
+    }
+
+    fetch(`${baseUrl}/mashups`, {
+      method: 'POST',
+      headers: this.headers(),
+      body: JSON.stringify(newMashup)
+    }).then(res => res.json())
+    .then(jsonObject => console.log(jsonObject))
+  }
+
+  handleSaveDisplay = () => {
+    return this.props.rightVideoEvent && this.props.leftVideoEvent ?
+    ( <div className="save-button">
+        <Form onSubmit={this.handleSave}>
+          <Form.Field>
+            <input id="title"placeholder='Mashup title' />
+          </Form.Field>
+          <Button positive type="submit"> Save </Button>
+        </Form>
+      </div>
+    )
+      : null
+  }
+
+  /// end code for save button //////////////////////
+
   render(){
     return(
       <div>
         {this.handleVolumeLeft()}
         {this.handleVolumeRight()}
+        {this.handleSaveDisplay()}
       </div>
     )
   }

@@ -46,3 +46,9 @@ body {
   margin-left: 200px;
   margin-right: 200px;
 }
+
+.save-button {
+  margin-top: 25px;
+  float: bottom;
+  text-align: center;
+}
