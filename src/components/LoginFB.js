@@ -34,6 +34,7 @@ export default class LoginFB extends Component {
       }
 
     }
+    
 
   handleError = (error) => {
     this.setState({ error });
@@ -41,10 +42,8 @@ export default class LoginFB extends Component {
 
   render() {
     return (
-      <FacebookProvider appId="1728368384131341"
-        className='facebook'>
+      <FacebookProvider appId="1728368384131341">
         <Login
-          className='facebook'
           scope="email"
           onResponse={this.handleResponse}
           onError={this.handleError}
