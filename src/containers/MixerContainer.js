@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Header, Icon, Modal } from 'semantic-ui-react'
 
 class MixerContainer extends React.Component {
   constructor(props){
@@ -67,18 +67,24 @@ class MixerContainer extends React.Component {
       method: 'POST',
       headers: this.headers(),
       body: JSON.stringify(newMashup)
-    }).then(res => res.json())
-    .then(jsonObject => console.log(jsonObject))
-  }
+     }).then(res => res.json())
+
+     event.target.title.value = ""
+    }
+
 
   handleSaveDisplay = () => {
-    return this.props.rightVideoEvent && this.props.leftVideoEvent ?
+    
+    return this.props.rightVideoEvent && this.props.leftVideoEvent
+           && !this.props.leftVideo.youtube_id && !this.props.rightVideo.youtube_id?
     ( <div className="save-button">
         <Form onSubmit={this.handleSave}>
           <Form.Field>
             <input id="title"placeholder='Mashup title' />
           </Form.Field>
-          <Button positive type="submit"> Save </Button>
+          <Modal trigger={<Button positive type="submit"> Save </Button>} basic size='small'>
+          <Header icon='archive' content='Mashup has been Saved!' />
+          </Modal>
         </Form>
       </div>
     )

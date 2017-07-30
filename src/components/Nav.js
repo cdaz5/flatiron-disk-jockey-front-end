@@ -6,9 +6,9 @@ export default class Nav extends Component {
 
   render() {
     return (
-      <Menu stackable>
+      <Menu stackable className="ui inverted menu">
         <Menu.Item>
-          <img src='/logo.png' />
+          <img src='https://s-media-cache-ak0.pinimg.com/236x/51/b1/7b/51b17b6c91ae5d128d19eb9353f530d5--recording-studio-turntable.jpg' />
         </Menu.Item>
 
         <Menu.Item>

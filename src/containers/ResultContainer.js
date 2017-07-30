@@ -10,19 +10,6 @@ export default class ResultContainer extends Component {
 
   constructor() {
     super();
-    this.state = {
-      mashups: []
-    }
-  }
-
-  componentDidMount() {
-    let baseUrl = 'http://localhost:3000/api/v1'
-    fetch(`${baseUrl}/mashups`, {
-      headers: this.headers()
-    }).then(res => res.json())
-    .then(allMashups => this.setState({
-      mashups: allMashups
-    }))
   }
 
   headers () {
@@ -37,7 +24,7 @@ export default class ResultContainer extends Component {
     return (
       <div className="resultBottom">
         <Grid relaxed columns={4}>
-          {this.state.mashups.map((mashup) => < Result mashupInfo={mashup} />)}
+          {this.props.mashups.map((mashup) => < Result mashupInfo={mashup} playResult={this.props.handlePlayResult} />)}
         </ Grid>
       </div>
     )
