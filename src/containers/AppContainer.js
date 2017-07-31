@@ -28,6 +28,8 @@ export default class AppContainer extends Component {
     .then(allMashups => this.setState({
       allMashups: allMashups
     }))
+
+    console.log(this.state.allMashups)
   }
 
   componentDidUpdate = () => {

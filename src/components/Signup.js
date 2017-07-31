@@ -29,9 +29,6 @@ class SignUpForm extends Component {
   render () {
     return (
       <div>
-      <Segment inverted>
-        <Divider horizontal inverted> <div className="header"> Flatiron-Disk-Jockey </div> </Divider>
-      </Segment>
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
           <label>Username</label>
