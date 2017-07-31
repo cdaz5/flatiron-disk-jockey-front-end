@@ -31,11 +31,21 @@ export default class PlayerContainer extends Component {
   }
 
   renderIframe = () => {
+    if(this.props.video.youtube_id){
+      return (
+        <YouTube id='pray'
+          videoId={this.props.video.youtube_id}
+          onReady={this.onReady.bind(this)}
+        />
+      )
+    } else {
+
     return !!this.props.video.id ?  <YouTube id='pray'
       videoId={this.props.video.id.videoId}
       onReady={this.onReady.bind(this)}
 
     /> : null
+   }
   }
 
   handleVideoClick = (result) => {

@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  height: 100%;
 }
 
 .videoWrapper {
@@ -41,3 +42,34 @@ body {
 /*.volumeLeft {
   float: left;
 }*/
+
+.resultBottom {
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.save-button {
+  margin-top: 25px;
+  float: bottom;
+  text-align: center;
+}
+
+.header {
+  font-family: 'Plaster', cursive;
+  font-size: 25px;
+  margin-bottom: 0px;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url("http://d279m997dpfwgl.cloudfront.net/wp/2017/05/0510_jarre-show.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
