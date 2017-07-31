@@ -30,7 +30,7 @@ class Result extends Component {
     let leftVideo = this.props.mashupInfo.videos[0]
     let rightVideo = this.props.mashupInfo.videos[1]
     this.props.playResult(leftVideo, rightVideo)
-  } 
+  }
 
   render(){
       let leftVideo = this.props.mashupInfo.videos[0]
@@ -40,7 +40,7 @@ class Result extends Component {
 
         <Grid.Column onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} >
           <Grid textAlign='center' >
-            <Grid.Row columns={2} color='olive' >
+            <Grid.Row columns={2} color='black' >
                 <Grid.Column>
                   <Image src={leftVideo.thumbnail} />
                 </Grid.Column>
@@ -50,15 +50,16 @@ class Result extends Component {
                 </Grid.Column>
             </Grid.Row>
 
-            <Grid.Row columns={1} color='grey'>
+            <Grid.Row columns={1} color='black'>
               <Grid.Column>
               {this.state.hover ?
                 <div>
-                  < Button primary onClick={this.handlePlay}> Play </ Button>
+                  < Button circular icon="play" onClick={this.handlePlay} />
                 </div>
                 :
                 <div>
-                  Mashup Info
+                  <br/>
+                  {this.props.mashupInfo.title}
                 </div>
               }
               </Grid.Column>
