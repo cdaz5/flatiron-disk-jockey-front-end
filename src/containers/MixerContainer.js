@@ -2,9 +2,10 @@ import React from 'react'
 import { Button, Grid, Form, Header, Icon, Modal, Popup } from 'semantic-ui-react'
 
 class MixerContainer extends React.Component {
+
   state = {
-    leftIsPlaying: false,
-    rightIsPlaying: false
+    leftCurrent: "",
+    rightCurrent: ""
   }
 
   handleVolumeLeft = () => {
@@ -191,6 +192,11 @@ class MixerContainer extends React.Component {
       headers: this.headers(),
       body: JSON.stringify(newMashup)
      }).then(res => res.json())
+     .then(jsonObject => this.setState({
+       leftCurrent: left.id.videoId,
+       rightCurrent: right.id.videoId
+     }))
+     .catch(error => console.log(error))
 
      event.target.title.value = ""
 
@@ -199,7 +205,13 @@ class MixerContainer extends React.Component {
 
 
   handleSaveDisplay = () => {
-
+    if(this.props.leftVideo.id && this.props.rightVideo.id){
+      if(this.state.leftCurrent === this.props.leftVideo.id.videoId &&
+         this.state.rightCurrent === this.props.rightVideo.id.videoId)
+         {
+           return null
+         }
+    }
     return this.props.rightVideoEvent && this.props.leftVideoEvent
            && !this.props.leftVideo.youtube_id && !this.props.rightVideo.youtube_id?
     ( <div className="save-button">
