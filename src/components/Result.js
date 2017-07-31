@@ -59,7 +59,7 @@ class Result extends Component {
                 :
                 <div>
                   <br/>
-                  {this.props.mashupInfo.title}
+                   {this.props.mashupInfo.title}
                 </div>
               }
               </Grid.Column>

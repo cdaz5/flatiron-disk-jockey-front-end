@@ -86,10 +86,6 @@ export default class AppContainer extends Component {
   render() {
     return (
       <div className="parallax">
-        <Segment inverted >
-          <Divider horizontal inverted > <div className="header">Flatiron-Disk-Jockey </div></Divider>
-        </Segment>
-        <Nav />
         <Grid columns='equal'>
           <Grid.Row>
             <Grid.Column>
@@ -130,7 +126,7 @@ export default class AppContainer extends Component {
               <div>
                 < ResultContainer handlePlayResult={this.handlePlayResult} mashups={this.state.allMashups}/>
               </div>
-            
+
             </Grid.Column>
           </Grid.Row>
         </Grid>

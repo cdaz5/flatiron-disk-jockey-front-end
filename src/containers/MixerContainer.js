@@ -51,7 +51,7 @@ class MixerContainer extends React.Component {
     let right = this.props.rightVideo
     let title = event.target.title.value
     let newMashup = {
-      title: 'test',
+      title: title,
       videos: [ {
         youtube_id: left.id.videoId,
         title: left.snippet.title,
@@ -74,7 +74,7 @@ class MixerContainer extends React.Component {
 
 
   handleSaveDisplay = () => {
-    
+
     return this.props.rightVideoEvent && this.props.leftVideoEvent
            && !this.props.leftVideo.youtube_id && !this.props.rightVideo.youtube_id?
     ( <div className="save-button">
@@ -83,7 +83,7 @@ class MixerContainer extends React.Component {
             <input id="title"placeholder='Mashup title' />
           </Form.Field>
           <Modal trigger={<Button positive type="submit"> Save </Button>} basic size='small'>
-          <Header icon='archive' content='Mashup has been Saved!' />
+          <Header icon='archive' content='Mashup Saved!' />
           </Modal>
         </Form>
       </div>

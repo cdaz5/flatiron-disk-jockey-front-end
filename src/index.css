@@ -56,7 +56,8 @@ body {
 
 .header {
   font-family: 'Plaster', cursive;
-  font-size: 50px;
+  font-size: 25px;
+  margin-bottom: 0px;
 }
 
 .parallax {
