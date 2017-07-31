@@ -13,7 +13,7 @@ export default class Nav extends Component {
         <Menu.Item header>
           <div className="header">Flatiron-Disk-Jockey</div>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item position="right">
         <NavLink
         to="/logout"
         >Logout</NavLink>
