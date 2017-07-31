@@ -37,7 +37,6 @@ class Result extends Component {
       let rightVideo = this.props.mashupInfo.videos[1]
 
       return(
-
         <Grid.Column onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} >
           <Grid textAlign='center' >
             <Grid.Row columns={2} color='black' >

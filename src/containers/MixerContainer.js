@@ -1,33 +1,101 @@
 import React from 'react'
-import { Button, Form, Header, Icon, Modal } from 'semantic-ui-react'
+import { Button, Grid, Form, Header, Icon, Modal, Popup } from 'semantic-ui-react'
 
 class MixerContainer extends React.Component {
-  constructor(props){
-    super(props)
-
+  state = {
+    leftIsPlaying: false,
+    rightIsPlaying: false
   }
 
   handleVolumeLeft = () => {
     return this.props.leftVideoEvent ?
     (
       <div className="slider-wrapper volumeLeft">
-      <input
-        id='volume-left'
-        onChange={(e)=>this.handleVolume()}
-        type="range" step="5"  min="0" max="100" defaultValue="50"
-      />
+        <Popup
+          trigger={<input
+            id='volume-left'
+            onChange={(e)=>this.handleVolume()}
+            type="range" step="5"  min="0" max="100" defaultValue="50"
+          />}
+          content='Volume'
+          position='right center'
+        />
       </div>
     )
       : null
   }
 
+  changeVideoSpeed = (e) => {
+    if (e.target.id === 'speed-left' && e.target.value > 0) {
+      this.props.leftVideoEvent.setPlaybackRate(e.target.value)
+    } else if (e.target.id === 'speed-left' && e.target.value == 0) {
+      this.props.leftVideoEvent.setPlaybackRate(.25)
+    } else if (e.target.id === 'speed-right' && e.target.value > 0) {
+      this.props.rightVideoEvent.setPlaybackRate(e.target.value)
+    } else if (e.target.id === 'speed-right' && e.target.value == 0) {
+      this.props.rightVideoEvent.setPlaybackRate(.25)
+    }
+  }
+
+  handleSpeedRight = () => {
+    return this.props.rightVideoEvent ?
+    (
+      <div className="slider-wrapper speedRight container">
+        <Popup
+          trigger={<input
+            id='speed-right'
+            onChange={this.changeVideoSpeed}
+            type="range" min="0" max="2" step='.5' defaultValue='1' list="tickmarks"
+          />}
+          content='Tempo Up/Down'
+          position='left center'
+        />
+      <datalist id="tickmarks">
+        <option>2</option>
+        <option>1.5</option>
+        <option>1</option>
+        <option>.5</option>
+        <option value='.25'>.25</option>
+      </datalist>
+      </div>
+    ) : null
+  }
+
+  handleSpeedLeft = () => {
+    return this.props.leftVideoEvent ?
+    (
+      <div className="slider-wrapper speedLeft container">
+        <Popup
+          trigger={<input
+            id='speed-left'
+            onChange={this.changeVideoSpeed}
+            type="range" min="0" max="2" step='.5' defaultValue='1' list="tickmarks"
+          />}
+          content='Tempo Up/Down'
+          position='right center'
+        />
+      <datalist id="tickmarks">
+        <option>2</option>
+        <option>1.5</option>
+        <option>1</option>
+        <option>.5</option>
+        <option value='.25'>.25</option>
+      </datalist>
+      </div>
+    ) : null
+  }
+
   handleCrossfader = () => {
     return this.props.rightVideoEvent && this.props.rightVideoEvent ?
     (
-      <div className="">
-      <input id="cross-fader"
-        onChange={(e)=> this.handleVolume()}
-        type="range" step="5"  min="-100" max="100" defaultValue="0"
+      <div className="cross-fader">
+        <Popup
+          trigger={<input id="cross-fader"
+            onChange={(e)=> this.handleVolume()}
+            type="range" step="5"  min="-100" max="100" defaultValue="0"
+          />}
+          content='<= Crossfade =>'
+          position='center top'
       />
       </div>
     )
@@ -53,14 +121,19 @@ class MixerContainer extends React.Component {
   }
 
 
+
   handleVolumeRight = () => {
     return this.props.rightVideoEvent ?
     (
       <div className="slider-wrapper volumeRight">
-      <input
-        id='volume-right'
-        onChange={(e)=>this.handleVolume()}
-        type="range" step="5"  min="0" max="100" defaultValue="50"
+      <Popup
+        trigger={<input
+          id='volume-right'
+          onChange={(e)=>this.handleVolume()}
+          type="range" step="5"  min="0" max="100" defaultValue="50"
+        />}
+        content='Volume'
+        position='left center'
       />
       </div>
     )
@@ -75,6 +148,23 @@ class MixerContainer extends React.Component {
       'accept': 'application/json',
       'Authorization': localStorage.getItem('jwt')
     }
+  }
+
+  playBothVideos = (e) => {
+    this.props.leftVideoEvent.playVideo()
+    this.props.rightVideoEvent.playVideo()
+    this.setState({
+      leftIsPlaying: true,
+      rightIsPlaying: true
+    })
+  }
+
+  pauseBothVideos = (e) => {
+    this.props.leftVideoEvent.pauseVideo()
+    this.props.rightVideoEvent.pauseVideo()
+    this.setState({
+
+    })
   }
 
   handleSave = (event) => {
@@ -103,6 +193,8 @@ class MixerContainer extends React.Component {
      }).then(res => res.json())
 
      event.target.title.value = ""
+
+     this.props.updateMashups()
     }
 
 
@@ -113,7 +205,7 @@ class MixerContainer extends React.Component {
     ( <div className="save-button">
         <Form onSubmit={this.handleSave}>
           <Form.Field>
-            <input id="title"placeholder='Mashup title' />
+            <input id="title" placeholder='Mashup Title' />
           </Form.Field>
           <Modal trigger={<Button positive type="submit"> Save </Button>} basic size='small'>
           <Header icon='archive' content='Mashup Saved!' />
@@ -129,11 +221,50 @@ class MixerContainer extends React.Component {
   render(){
     return(
       <div>
-        {this.handleVolumeLeft()}
-        {this.handleVolumeRight()}
-        {this.handleCrossfader()}
-        {this.handleSaveDisplay()}
-
+        <Grid>
+          <Grid.Row columns={4}>
+            <Grid.Column>
+              {this.handleVolumeLeft()}
+            </Grid.Column>
+            <Grid.Column>
+              {this.props.leftVideoEvent && this.props.rightVideoEvent ?
+                <div className='play-icon'>
+                  <Icon.Group size='big'>
+                    <Icon name='thin circle' size='big' color='green'/>
+                    <Icon color='green' name='play' onClick={this.playBothVideos}/>
+                  </Icon.Group>
+                </div> : null }
+            </Grid.Column>
+            <Grid.Column>
+              {this.props.leftVideoEvent && this.props.rightVideoEvent ?
+                <div className='play-icon'>
+                  <Icon.Group size='big'>
+                    <Icon name='thin circle' size='big' color='green'/>
+                    <Icon color='green' name='pause' onClick={this.pauseBothVideos} />
+                  </Icon.Group>
+                </div> : null}
+            </Grid.Column>
+            <Grid.Column>
+              {this.handleVolumeRight()}
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              {this.handleCrossfader()}
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={3}>
+            <Grid.Column width={3}>
+              {this.handleSpeedLeft()}
+            </Grid.Column>
+            <Grid.Column width={10}>
+              {this.handleSaveDisplay()}
+            </Grid.Column>
+            <Grid.Column width={3}>
+              {this.handleSpeedRight()}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }

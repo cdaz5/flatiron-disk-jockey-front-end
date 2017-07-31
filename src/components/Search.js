@@ -56,6 +56,8 @@ export default class SearchExampleStandard extends Component {
 
     return (
           <Search
+            input={{fluid: true}}
+            fluid='true'
             resultRenderer={this.resultRenderer}
             loading={isLoading}
             onResultSelect={this.handleResultSelect}

@@ -20,6 +20,7 @@ export default class AppContainer extends Component {
     }
   }
 
+
   componentDidMount = () => {
     let baseUrl = 'http://localhost:3000/api/v1'
     fetch(`${baseUrl}/mashups`, {
@@ -32,7 +33,7 @@ export default class AppContainer extends Component {
     console.log(this.state.allMashups)
   }
 
-  componentDidUpdate = () => {
+  updateMashups = () => {
     let baseUrl = 'http://localhost:3000/api/v1'
     fetch(`${baseUrl}/mashups`, {
       headers: this.headers()
@@ -90,8 +91,8 @@ export default class AppContainer extends Component {
       <div className="parallax">
         <Grid columns='equal'>
           <Grid.Row>
-            <Grid.Column>
-              <Segment>
+            <Grid.Column stretched>
+              <Segment className='player-container'>
                 <PlayerContainer
                   video={this.state.leftVideo}
                   position="left"
@@ -100,9 +101,10 @@ export default class AppContainer extends Component {
                 />
               </Segment>
             </Grid.Column>
-            <Grid.Column width={4}>
-              <Segment>
+            <Grid.Column width={4} stretched>
+              <Segment className='mixer-container'>
                 <MixerContainer
+                  updateMashups={this.updateMashups}
                   leftVideoEvent={this.state.playerLeft}
                   rightVideoEvent={this.state.playerRight}
                   leftVideo={this.state.leftVideo}
@@ -111,8 +113,8 @@ export default class AppContainer extends Component {
                 />
               </Segment>
             </Grid.Column>
-            <Grid.Column>
-              <Segment>
+            <Grid.Column stretched>
+              <Segment className='player-container'>
                 <PlayerContainer
                   video={this.state.rightVideo}
                   position="right"

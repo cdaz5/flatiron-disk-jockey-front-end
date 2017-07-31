@@ -60,10 +60,10 @@ export default class PlayerContainer extends Component {
         <Search handleVideoClick={this.handleVideoClick} />
         <div className="videoWrapper">{this.renderIframe()}</div>
         {this.props.video.id ?
-        <Button.Group labeled>
-          <Button icon='play' content='Play' onClick={this.playVideo} />
-          <Button icon='pause' content='Pause' onClick={this.pauseVideo} />
-          <Button icon='stop' content='Stop' onClick={this.stopVideo} />
+        <Button.Group labeled fluid='true' clasName='button-group'>
+          <Button color='black' inverted icon='play' content='Play' onClick={this.playVideo} />
+          <Button color='black' inverted icon='pause' content='Pause' onClick={this.pauseVideo} />
+          <Button color='black' inverted icon='stop' content='Stop' onClick={this.stopVideo} />
         </Button.Group> : null
       }
       </div>

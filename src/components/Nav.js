@@ -8,7 +8,7 @@ export default class Nav extends Component {
     return (
       <Menu stackable className="ui inverted menu">
         <Menu.Item>
-          <iframe src="https://giphy.com/embed/FLqffRM7VoCkw" width="30" height="30" frameBorder="0" class="giphy-embed"></iframe>
+          <iframe src="https://giphy.com/embed/ccu9c0Iu7aGFa" width="50" height="50" frameBorder="0" class="giphy-embed"></iframe>
         </Menu.Item>
         <Menu.Item header>
           <div className="header">Flatiron-Disk-Jockey</div>

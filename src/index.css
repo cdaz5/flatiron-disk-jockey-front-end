@@ -27,6 +27,27 @@ body {
   padding: 0;
 }
 
+.search-bar {
+  position: center;
+}
+
+.button-group {
+  background: transparent !important;
+  background-size: cover;
+  color: black;
+  margin-top: 30px;
+}
+
+.mixer-container {
+  background-image: url('https://s-media-cache-ak0.pinimg.com/originals/55/0b/f6/550bf603d8cb680e051b65a6fc65542a.jpg') !important;
+  background-size: cover;
+}
+
+.player-container {
+  background: transparent !important;
+  background-size: cover;
+}
+
 .slider-wrapper input {
   width: 150px;
   height: 20px;
@@ -36,6 +57,10 @@ body {
 }
 
 .volumeRight {
+  float: right;
+}
+
+.speedRight {
   float: right;
 }
 
@@ -55,14 +80,28 @@ body {
   float: left;
 }*/
 
+/*#tickmarks {
+  display: inline-block;
+  text-align: right;
+}*/
+
 .resultBottom {
   margin-left: 200px;
   margin-right: 200px;
 }
 
 .save-button {
-  margin-top: 25px;
-  float: bottom;
+  float: top;
+  text-align: center;
+}
+
+.play-icon {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.cross-fader {
+  float: center;
   text-align: center;
 }
 

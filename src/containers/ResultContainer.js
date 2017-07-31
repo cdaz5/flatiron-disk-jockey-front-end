@@ -15,7 +15,7 @@ export default class ResultContainer extends Component {
       <div className="resultBottom">
         <Grid relaxed columns={4}>
           {this.props.mashups.map((mashup) => < Result mashupInfo={mashup} playResult={this.props.handlePlayResult} />)}
-        </ Grid>
+        </Grid>
       </div>
     )
   }
