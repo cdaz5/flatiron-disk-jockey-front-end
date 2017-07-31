@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Segment, Divider } from 'semantic-ui-react'
 
 class SignUpForm extends Component {
 
@@ -28,6 +28,7 @@ class SignUpForm extends Component {
 
   render () {
     return (
+      <div>
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
           <label>Username</label>
@@ -39,7 +40,7 @@ class SignUpForm extends Component {
         </Form.Field>
         <Button type='submit'>Sign Up</Button>
       </Form>
-
+      </div>
     )
   }
 }

@@ -1,25 +1,57 @@
 import React, {Component} from 'react';
 import Nav from '../components/Nav'
 import PlayerContainer from './PlayerContainer'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Segment, Divider } from 'semantic-ui-react'
 import MixerContainer from './MixerContainer'
+import ResultContainer from './ResultContainer'
 
 
 export default class AppContainer extends Component {
-    constructor() {
-      super();
+  constructor() {
+    super();
 
-      this.state = {
-      playerLeft: null,
-      playerRight: null,
+    this.state = {
+    playerLeft: null,
+    playerRight: null,
 
-        leftVideo: {},
-        rightVideo: {},
-        results: []
-      }
+      leftVideo: {},
+      rightVideo: {},
+      allMashups: []
     }
+  }
+
+  componentDidMount = () => {
+    let baseUrl = 'http://localhost:3000/api/v1'
+    fetch(`${baseUrl}/mashups`, {
+      headers: this.headers()
+    }).then(res => res.json())
+    .then(allMashups => this.setState({
+      allMashups: allMashups
+    }))
+
+    console.log(this.state.allMashups)
+  }
+
+  componentDidUpdate = () => {
+    let baseUrl = 'http://localhost:3000/api/v1'
+    fetch(`${baseUrl}/mashups`, {
+      headers: this.headers()
+    }).then(res => res.json())
+    .then(allMashups => this.setState({
+      allMashups: allMashups
+    }))
+  }
+
+  headers () {
+    return {
+      'content-type': 'application/json',
+      'accept': 'application/json',
+      'Authorization': localStorage.getItem('jwt')
+    }
+  }
 
   handleSetPlayer = (event, position) => {
+    console.log(event.target)
     if(position === "left"){
       this.setState({
         playerLeft: event.target
@@ -45,10 +77,17 @@ export default class AppContainer extends Component {
     }
   }
 
+  handlePlayResult = (leftVideo, rightVideo) => {
+    console.log(leftVideo, rightVideo)
+    this.setState({
+      leftVideo: leftVideo,
+      rightVideo: rightVideo
+    })
+  }
+
   render() {
     return (
-      <div>
-        <Nav />
+      <div className="parallax">
         <Grid columns='equal'>
           <Grid.Row>
             <Grid.Column>
@@ -66,6 +105,9 @@ export default class AppContainer extends Component {
                 <MixerContainer
                   leftVideoEvent={this.state.playerLeft}
                   rightVideoEvent={this.state.playerRight}
+                  leftVideo={this.state.leftVideo}
+                  rightVideo={this.state.rightVideo}
+                  allMashups={this.state.allMashups}
                 />
               </Segment>
             </Grid.Column>
@@ -82,7 +124,11 @@ export default class AppContainer extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <Segment />
+
+              <div>
+                < ResultContainer handlePlayResult={this.handlePlayResult} mashups={this.state.allMashups}/>
+              </div>
+
             </Grid.Column>
           </Grid.Row>
         </Grid>

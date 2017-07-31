@@ -17,7 +17,8 @@ export default class LoginFB extends Component {
             console.log("do nothing")
           }else{
             localStorage.setItem('jwt', res.jwt)
-            this.props.onSignupFB(res.username)
+            this.props.onSignupLoginFB(res.username)
+
           }
         })
       } else if (document.URL.includes('login')) {
@@ -28,13 +29,12 @@ export default class LoginFB extends Component {
               console.log("do nothing")
             }else{
               localStorage.setItem('jwt', res.jwt)
-              this.props.onLoginFB(res.username)
+              this.props.onSignupLoginFB(res.username)
             }
           })
       }
 
     }
-    
 
   handleError = (error) => {
     this.setState({ error });

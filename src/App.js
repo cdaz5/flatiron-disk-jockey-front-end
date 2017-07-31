@@ -19,7 +19,17 @@ class App extends Component {
     }
   }
 
-  onSignupOrLoginFB = (username) => {
+
+  onSignupLoginFB = (username) => {
+    this.setState({
+      auth:{
+        isLoggedIn: true,
+        user: username
+      }
+    })
+  }
+
+  onLoginFB = (username) => {
     this.setState({
       auth:{
         isLoggedIn: true,
@@ -82,14 +92,14 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <Nav/>
           <Route exact path="/" render={() => this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <Landing />} />
           <Route path="/players" component={Authorize(AppContainer)} />
-          <Route path="/signup" render={()=> this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <div> <SignUp onSendSignUp={this.onSignup}/> <br/> <LoginFB onSignupFB={this.onSignupOrLoginFB} status={'Sign up'} /> </div>} />
+          <Route path="/signup" render={()=> this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <div> <SignUp onSendSignUp={this.onSignup}/><br/><LoginFB status='Sign up' onSignupLoginFB={this.onSignupLoginFB}/> </div> }/>
           <Route path="/logout" render={() => {
             this.handleLogout()
             return (<Redirect to="/"/>)}} />
-
-          <Route path='/login' render={()=> this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <div> <Login onSendLogin={this.onLogin}/> <br/> <LoginFB onLoginFB={this.onSignupOrLoginFB} status={'Login'} /> </div> } />
+          <Route path="/login" render={()=> this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <div><Login onSendLogin={this.onLogin}/><br/><LoginFB status='Login' onSignupLoginFB={this.onSignupLoginFB} /> </div>} />
         </div>
       </Router>
     )

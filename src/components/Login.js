@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Segment, Divider } from 'semantic-ui-react'
 
 class LoginForm extends Component {
 
@@ -28,6 +28,7 @@ class LoginForm extends Component {
 
   render () {
     return (
+      <div>
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
           <label>Username</label>
@@ -39,7 +40,7 @@ class LoginForm extends Component {
         </Form.Field>
         <Button type='submit'>Log In</Button>
       </Form>
-
+      </div>
     )
   }
 }
