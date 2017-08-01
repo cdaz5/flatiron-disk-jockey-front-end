@@ -95,11 +95,11 @@ class App extends Component {
           <Nav/>
           <Route exact path="/" render={() => this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <Landing />} />
           <Route path="/players" component={Authorize(AppContainer)} />
-          <Route path="/signup" render={()=> this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <div> <SignUp onSendSignUp={this.onSignup}/><br/><LoginFB status='Sign up' onSignupLoginFB={this.onSignupLoginFB}/> </div> }/>
+          <Route path="/signup" render={()=> this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <SignUp onSendSignUp={this.onSignup} onSignupLoginFB={this.onSignupLoginFB}/>} />
           <Route path="/logout" render={() => {
             this.handleLogout()
             return (<Redirect to="/"/>)}} />
-          <Route path="/login" render={()=> this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <div><Login onSendLogin={this.onLogin}/><br/><LoginFB status='Login' onSignupLoginFB={this.onSignupLoginFB} /> </div>} />
+          <Route path="/login" render={()=> this.state.auth.isLoggedIn ? <Redirect to="/players"/> : <Login onSendLogin={this.onLogin} onSignupLoginFB={this.onSignupLoginFB} />} />
         </div>
       </Router>
     )

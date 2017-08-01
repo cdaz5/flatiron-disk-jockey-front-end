@@ -85,6 +85,14 @@ body {
   text-align: right;
 }*/
 
+.center {
+  text-align: center;
+}
+
+.loginForm {
+  margin-top: 150px;
+}
+
 .resultBottom {
   margin-left: 200px;
   margin-right: 200px;
@@ -109,6 +117,20 @@ body {
   font-family: 'Plaster', cursive;
   font-size: 25px;
   margin-bottom: 0px;
+}
+
+.landing {
+  height: 100%;
+}
+
+.nav {
+  margin-bottom: 0px !important;
+}
+
+.landingResult {
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-top: 100px;
 }
 
 .parallax {

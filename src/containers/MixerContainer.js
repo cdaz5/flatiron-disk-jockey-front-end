@@ -1,10 +1,12 @@
 import React from 'react'
+import SaveModal from '../components/SaveModal.js'
 import { Button, Grid, Form, Header, Icon, Modal, Popup } from 'semantic-ui-react'
 
 class MixerContainer extends React.Component {
+
   state = {
-    leftIsPlaying: false,
-    rightIsPlaying: false
+    leftCurrent: "",
+    rightCurrent: ""
   }
 
   handleVolumeLeft = () => {
@@ -191,11 +193,16 @@ class MixerContainer extends React.Component {
       headers: this.headers(),
       body: JSON.stringify(newMashup)
      }).then(res => res.json())
+     .then(() => this.setState({
+       leftCurrent: left.id.videoId,
+       rightCurrent: right.id.videoId
+     })).then(this.props.updateMashups)
 
      event.target.title.value = ""
 
-     this.props.updateMashups()
     }
+
+
 
 
   handleSaveDisplay = () => {
@@ -207,9 +214,7 @@ class MixerContainer extends React.Component {
           <Form.Field>
             <input id="title" placeholder='Mashup Title' />
           </Form.Field>
-          <Modal trigger={<Button positive type="submit"> Save </Button>} basic size='small'>
-          <Header icon='archive' content='Mashup Saved!' />
-          </Modal>
+          <Button positive type="submit" onClick={< SaveModal />}> Save </Button>
         </Form>
       </div>
     )

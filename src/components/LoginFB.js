@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import FacebookProvider, { Login } from 'react-facebook';
 import AuthAdapter from '../authAdapter'
 import Authorize from '../Authorize'
+import {Button, Icon} from 'semantic-ui-react'
 
 export default class LoginFB extends Component {
   handleResponse = (data) => {
@@ -48,7 +49,7 @@ export default class LoginFB extends Component {
           onResponse={this.handleResponse}
           onError={this.handleError}
         >
-          <span className='facebook'>{`${this.props.status} with Facebook`}</span>
+        <Button size='huge' color='facebook'><Icon name='facebook' /> Facebook</Button>
         </Login>
       </FacebookProvider>
     );
