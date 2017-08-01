@@ -53,7 +53,7 @@ class Result extends Component {
               <Grid.Column>
               {this.state.hover ?
                 <div>
-                  < Button circular icon="play" onClick={this.handlePlay} />
+                 < Button circular icon="play" onClick={this.handlePlay} />
                 </div>
                 :
                 <div>

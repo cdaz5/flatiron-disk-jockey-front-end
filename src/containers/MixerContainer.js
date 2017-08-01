@@ -1,4 +1,5 @@
 import React from 'react'
+import SaveModal from '../components/SaveModal.js'
 import { Button, Grid, Form, Header, Icon, Modal, Popup } from 'semantic-ui-react'
 
 class MixerContainer extends React.Component {
@@ -192,26 +193,20 @@ class MixerContainer extends React.Component {
       headers: this.headers(),
       body: JSON.stringify(newMashup)
      }).then(res => res.json())
-     .then(jsonObject => this.setState({
+     .then(() => this.setState({
        leftCurrent: left.id.videoId,
        rightCurrent: right.id.videoId
-     }))
-     .catch(error => console.log(error))
+     })).then(this.props.updateMashups)
 
      event.target.title.value = ""
 
-     this.props.updateMashups()
     }
+
+
 
 
   handleSaveDisplay = () => {
-    if(this.props.leftVideo.id && this.props.rightVideo.id){
-      if(this.state.leftCurrent === this.props.leftVideo.id.videoId &&
-         this.state.rightCurrent === this.props.rightVideo.id.videoId)
-         {
-           return null
-         }
-    }
+
     return this.props.rightVideoEvent && this.props.leftVideoEvent
            && !this.props.leftVideo.youtube_id && !this.props.rightVideo.youtube_id?
     ( <div className="save-button">
@@ -219,9 +214,7 @@ class MixerContainer extends React.Component {
           <Form.Field>
             <input id="title" placeholder='Mashup Title' />
           </Form.Field>
-          <Modal trigger={<Button positive type="submit"> Save </Button>} basic size='small'>
-          <Header icon='archive' content='Mashup Saved!' />
-          </Modal>
+          <Button positive type="submit" onClick={< SaveModal />}> Save </Button>
         </Form>
       </div>
     )
