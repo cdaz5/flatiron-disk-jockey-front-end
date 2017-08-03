@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   height: 100%;
 }
 
@@ -41,6 +41,11 @@ body {
 .mixer-container {
   background-image: url('https://s-media-cache-ak0.pinimg.com/originals/55/0b/f6/550bf603d8cb680e051b65a6fc65542a.jpg') !important;
   background-size: cover;
+}
+
+.loginPage {
+  background-image: url("http://d279m997dpfwgl.cloudfront.net/wp/2017/05/0510_jarre-show.jpg");
+  height: 1000px;
 }
 
 .player-container {
@@ -108,6 +113,10 @@ body {
   text-align: center;
 }
 
+.disk {
+  margin-bottom: 5px;
+}
+
 .cross-fader {
   float: center;
   text-align: center;
@@ -117,7 +126,11 @@ body {
   font-family: 'Plaster', cursive;
   font-size: 25px;
   margin-bottom: 0px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 
 .landing {
   height: 100%;

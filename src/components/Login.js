@@ -29,22 +29,22 @@ class LoginForm extends Component {
 
   render () {
     return (
-      <Grid centered columns={3}>
-        <Grid.Column>
-          <Form onSubmit={this.handleSubmit} className='loginForm'>
-            <Form.Field>
-              <label>Username</label>
-              <input name='username' placeholder='Username' onChange={this.handleChange} />
-            </Form.Field>
-            <Form.Field>
-              <label>Password</label>
-              <input type='password' name='password' placeholder='Password' onChange={this.handleChange} />
-            </Form.Field>
-            <Button type='submit' size='huge'>Log In</Button>
-            <LoginFB onSignupLoginFB={this.props.onSignupLoginFB} />
-          </Form>
-        </Grid.Column>
-      </Grid>
+      <div className='loginPage'>
+        <Grid centered columns={3}>
+          <Grid.Column verticalAlign='center'>
+            <Form onSubmit={this.handleSubmit} className='loginForm'>
+              <Form.Field>
+                <input name='username' placeholder='Username' onChange={this.handleChange} />
+              </Form.Field>
+              <Form.Field>
+                <input type='password' name='password' placeholder='Password' onChange={this.handleChange} />
+              </Form.Field>
+              <Button type='submit' size='huge'>Log In</Button>
+              <LoginFB onSignupLoginFB={this.props.onSignupLoginFB} />
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </div>
     )
   }
 }

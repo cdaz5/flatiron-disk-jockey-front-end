@@ -6,11 +6,11 @@ export default class Nav extends Component {
 
   render() {
     return (
-      <Menu stackable className="ui inverted menu nav">
+      <Menu stackable className="ui inverted menu nav" borderless>
         <Menu.Item>
-          <iframe src="https://giphy.com/embed/ccu9c0Iu7aGFa" width="50" height="50" frameBorder="0" class="giphy-embed"></iframe>
+          <div className='disk'><iframe src="https://giphy.com/embed/ccu9c0Iu7aGFa" width="50" height="50" frameBorder="0" class="giphy-embed"></iframe></div>
         </Menu.Item>
-        <Menu.Item header>
+        <Menu.Item header className="header" position='right'>
           <div className="header">Flatiron-Disk-Jockey</div>
         </Menu.Item>
         <Menu.Item position="right">
