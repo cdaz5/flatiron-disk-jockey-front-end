@@ -25,7 +25,7 @@ export default class SearchExampleStandard extends Component {
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, searchTerm: value })
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=AIzaSyDdOG-O-9rzZJ1oiXb18yRvNvWZGqDnO9E`)
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=${process.env.REACT_APP_YOUTUBE_API}`)
     .then(resp => resp.json())
     .then(jsonObject => {
       this.setState({

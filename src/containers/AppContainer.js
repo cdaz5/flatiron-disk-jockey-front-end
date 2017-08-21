@@ -5,6 +5,7 @@ import { Grid, Segment, Divider } from 'semantic-ui-react'
 import MixerContainer from './MixerContainer'
 import ResultContainer from './ResultContainer'
 
+const BASE_URL = process.env.REACT_APP_API
 
 export default class AppContainer extends Component {
   constructor() {
@@ -22,8 +23,7 @@ export default class AppContainer extends Component {
 
 
   componentDidMount = () => {
-    let baseUrl = 'http://localhost:3000/api/v1'
-    fetch(`${baseUrl}/mashups`, {
+    fetch(`${BASE_URL}/mashups`, {
       headers: this.headers()
     }).then(res => res.json())
     .then(allMashups => this.setState({
@@ -32,8 +32,7 @@ export default class AppContainer extends Component {
   }
 
   updateMashups = () => {
-    let baseUrl = 'http://localhost:3000/api/v1'
-    fetch(`${baseUrl}/mashups`, {
+    fetch(`${BASE_URL}/mashups`, {
       headers: this.headers()
     }).then(res => res.json())
     .then(allMashups => this.setState({

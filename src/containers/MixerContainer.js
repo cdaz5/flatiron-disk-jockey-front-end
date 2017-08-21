@@ -2,6 +2,9 @@ import React from 'react'
 import SaveModal from '../components/SaveModal.js'
 import { Button, Grid, Form, Header, Icon, Modal, Popup } from 'semantic-ui-react'
 
+const BASE_URL = process.env.REACT_APP_API
+
+
 class MixerContainer extends React.Component {
 
   state = {
@@ -170,8 +173,6 @@ class MixerContainer extends React.Component {
   }
 
   handleSave = (event) => {
-
-    let baseUrl = 'http://localhost:3000/api/v1'
     let left = this.props.leftVideo
     let right = this.props.rightVideo
     let title = event.target.title.value
@@ -188,7 +189,7 @@ class MixerContainer extends React.Component {
       } ]
     }
 
-    fetch(`${baseUrl}/mashups`, {
+    fetch(`${BASE_URL}/mashups`, {
       method: 'POST',
       headers: this.headers(),
       body: JSON.stringify(newMashup)

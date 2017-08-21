@@ -4,6 +4,7 @@ import Result from './Result'
 import SaveModal from './SaveModal'
 import {Button, Segment, Divider, Grid, Image} from 'semantic-ui-react'
 
+const BASE_URL = process.env.REACT_APP_API
 
 class Landing extends React.Component {
 
@@ -12,8 +13,7 @@ class Landing extends React.Component {
   }
 
   componentDidMount = () => {
-    let baseUrl = 'http://localhost:3000/api/v1'
-    fetch(`${baseUrl}/mashups`, {
+    fetch(`${BASE_URL}/mashups`, {
       headers: this.headers()
     }).then(res => res.json())
     .then(landingMashups => this.setState({
